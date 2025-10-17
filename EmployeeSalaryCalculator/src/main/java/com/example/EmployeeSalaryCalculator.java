@@ -59,15 +59,48 @@ public class EmployeeSalaryCalculator
 				if(HW <= standardWorkingHours)
 				{
 					//YOUR CODE STARTS HERE
-					 
+                    // No overtime hours clocked:
+                    // update overTime Rate
 
+					// update overtime and overtimePay to 0
+                    overTime = 0;
+                    overTimePay = 0;
+                    // update overTime Rate:
+                    overTimeRate = 2 * hourlyRate;
+
+                    // Calculate basicPay = hourlyRate * hoursWorked
+                    basicPay = hourlyRate * hoursWorked;
+                    // No overtime hours worked, therefore grossSalary = basicPay
+                    grossSalary = basicPay;
 					//YOUR CODE ENDS HERE
 				}
 				else
 				{
 					//YOUR CODE STARTS HERE
- 
+                    // overtime hours >
+                    // calculate overtime hours
+                    overTime = hoursWorked - standardWorkingHours;
+                    // update overTime Rate:
+                    overTimeRate = 2 * hourlyRate;
 
+                    // calculate overtime pay
+                    overTimePay = (2 * hourlyRate) * overTime;
+
+                    // calculate basic pay
+                    basicPay = hourlyRate * (hoursWorked - overTime);
+
+                    // calculate grossSalary as sum of basicPay and OverTimePay
+                    grossSalary = overTimePay + basicPay;
+
+                    /*
+                     * (Note) there is some repetition of code due to being restricted between two if/else blocks.
+                     * e.g. grossSalary = overTimePay + basicPay in both cases, so could be moved outside the if statement.
+                     * OverTimeRate is also 2*basicPay in either case, so doesn't need to be updated in each block.
+                     *
+                     * Also note that tests only make calls to salaryCalculator
+                     * therefore updates to static variables other than grossSalary aren't necessary - but have been included
+                     * here so that EmployeeSalaryCalculator.main() runs as expected.
+                     */
 					//YOUR CODE ENDS HERE
 				}
 				return grossSalary;
